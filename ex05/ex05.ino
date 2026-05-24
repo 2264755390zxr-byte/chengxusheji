@@ -5,6 +5,7 @@
 
 const int ledPin = 2;
 const int touchPin = T0;  // 触摸引脚
+const int touchThreshold = 600; // 触摸阈值，根据实际情况调整
 
 bool lastTouchState = false;
 unsigned long lastDebounceTime = 0;
@@ -20,6 +21,8 @@ unsigned long prevMillis = 0;
 int brightness = 0;
 int direction = 1;  // 1: 增加, -1: 减少
 
+
+
 void setup() {
   pinMode(ledPin, OUTPUT);
   analogWrite(ledPin, 0);
@@ -28,7 +31,7 @@ void setup() {
 void loop() {
   // 读取触摸状态
   int touchValue = touchRead(touchPin);
-  bool currentTouchState = (touchValue < 30) ? false : true;
+  bool currentTouchState = (touchValue < touchThreshold ) ? false : true;
   
   // 软件防抖和边缘检测
   unsigned long currentMillis = millis();
