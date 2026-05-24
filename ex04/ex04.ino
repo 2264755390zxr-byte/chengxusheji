@@ -9,7 +9,7 @@ bool ledState = false;           // LED当前状态
 bool lastTouchState = false;     // 上一次触摸状态
 unsigned long lastDebounceTime = 0;
 const long debounceDelay = 50;   // 软件防抖延迟 50ms
-
+unsigned long touchThreshold = 600;
 void setup() {
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
@@ -19,7 +19,7 @@ void loop() {
   // 读取当前触摸状态
   // 触摸传感器阈值通常在30以下（未触摸），>30为触摸
   int touchValue = touchRead(touchPin);
-  bool currentTouchState = (touchValue < 30) ? false : true;
+  bool currentTouchState = (touchValue < touchThreshold ) ? false : true;
   
   // 软件防抖：判断是否超过防抖延迟
   unsigned long currentMillis = millis();
