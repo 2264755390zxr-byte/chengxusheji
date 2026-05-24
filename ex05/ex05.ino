@@ -1,6 +1,7 @@
 // Ex05 - 多档位触摸调速呼吸灯
 // 功能：结合呼吸灯和触摸自锁开关，每次触摸改变呼吸灯的速度（1、2、3档）
 // 关联：实验3(PWM呼吸灯)、实验4(触摸引脚)
+// 预期效果：LED呈现呼吸灯效果，触摸改变呼吸速度（三个明显的速度级别）
 
 const int ledPin = 2;
 const int touchPin = T0;  // 触摸引脚
@@ -9,12 +10,11 @@ bool lastTouchState = false;
 unsigned long lastDebounceTime = 0;
 const long debounceDelay = 50;
 
-int speedLevel = 1;  // 速度档位：1(慢)、2(中)、3(快)
+int speedLevel = 1;  // 速度档位：1(缓慢呼吸)、2(正常呼吸)、3(急促呼吸)
 
-// 各档位的延迟时间
-const int delayFast[] = {1, 2, 3};      // 快速档
-const int delaySlow[] = {8, 6, 4};      // 对应各档的延迟
-const int stepSize[] = {3, 5, 8};       // 占空比递增步长
+// 各档位的PWM参数
+const int delayMS[4] = {0, 10, 6, 2};   // 0: 占位符, 1档(ms), 2档(ms), 3档(ms)
+const int stepSize[4] = {0, 2, 4, 8};   // 0: 占位符, 1档步长, 2档步长, 3档步长
 
 unsigned long prevMillis = 0;
 int brightness = 0;
@@ -44,25 +44,13 @@ void loop() {
   
   lastTouchState = currentTouchState;
   
-  // 根据档位选择延迟
-  int delayTime = 0;
-  if (speedLevel == 1) delayTime = 8;
-  else if (speedLevel == 2) delayTime = 5;
-  else if (speedLevel == 3) delayTime = 2;
-  
-  // 呼吸灯逻辑：根据档位改变步长
-  int step = 0;
-  if (speedLevel == 1) step = 2;
-  else if (speedLevel == 2) step = 4;
-  else if (speedLevel == 3) step = 6;
-  
-  // PWM呼吸灯核心逻辑
-  if (currentMillis - prevMillis >= delayTime) {
+  // PWM呼吸灯核心逻辑：根据当前档位更新
+  if (currentMillis - prevMillis >= delayMS[speedLevel]) {
     prevMillis = currentMillis;
     
-    brightness += direction * step;
+    brightness += direction * stepSize[speedLevel];
     
-    // 亮度反向控制
+    // 亮度范围约束：0-255
     if (brightness >= 255) {
       brightness = 255;
       direction = -1;
