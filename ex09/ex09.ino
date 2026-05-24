@@ -5,15 +5,15 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-const char* ssid = "your_ssid";
-const char* password = "your_password";
+const char* ssid = "111";
+const char* password = "54188sb.";
 
 const int touchPin = T0;      // 触摸引脚(GPIO4)
 
 // 传感器数据
 int sensorValue = 0;
-int baselineValue = 50;       // 基线值（初始化时校准）
-int calibratedThreshold = 40; // 动态阈值（基线值的80%）
+int baselineValue = 750;       // 基线值（初始化时校准）
+int calibratedThreshold = 600; // 动态阈值（基线值的80%）
 
 // 校准相关
 bool isCalibrated = false;

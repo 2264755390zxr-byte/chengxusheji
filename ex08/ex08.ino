@@ -5,8 +5,8 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-const char* ssid = "your_ssid";
-const char* password = "your_password";
+const char* ssid = "111";
+const char* password = "54188sb.";
 
 const int ledPin = 2;         // LED引脚
 const int touchPin = T0;      // 触摸引脚(GPIO4)
@@ -140,17 +140,17 @@ const char htmlPage[] = R"(
 </head>
 <body>
     <div class="container">
-        <h1>🚨 安防报警器</h1>
-        <div class="status disarmed" id="status">未布防</div>
+        <h1>Alarm System</h1>
+        <div class="status disarmed" id="status">Disarmed</div>
         <div class="alarm-indicator" id="alarmIndicator"></div>
         <div class="button-group">
-            <button class="arm-btn" id="armBtn" onclick="armSystem()">🔒 布防(Arm)</button>
-            <button class="disarm-btn" id="disarmBtn" onclick="disarmSystem()" disabled>🔓 撤防(Disarm)</button>
+            <button class="arm-btn" id="armBtn" onclick="armSystem()">Arm</button>
+            <button class="disarm-btn" id="disarmBtn" onclick="disarmSystem()" disabled>Disarm</button>
         </div>
         <div class="info-text">
-            <p>✓ 点击"布防"启动安防系统</p>
-            <p>✓ 触摸传感器会触发报警</p>
-            <p>⚠ 只有点击"撤防"才能停止报警</p>
+            <p>- Click Arm to start the alarm system</p>
+            <p>- Touch sensor will trigger alarm when armed</p>
+            <p>- Only click Disarm to stop the alarm</p>
         </div>
     </div>
 
@@ -183,12 +183,12 @@ const char htmlPage[] = R"(
                     const alarmIndicator = document.getElementById('alarmIndicator');
 
                     if (data.armed) {
-                        statusDiv.textContent = '已布防 ⚠️';
+                        statusDiv.textContent = 'ARMED';
                         statusDiv.className = 'status armed';
                         armBtn.disabled = true;
                         disarmBtn.disabled = false;
                     } else {
-                        statusDiv.textContent = '未布防 ✓';
+                        statusDiv.textContent = 'DISARMED';
                         statusDiv.className = 'status disarmed';
                         armBtn.disabled = false;
                         disarmBtn.disabled = true;

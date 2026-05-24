@@ -5,8 +5,8 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-const char* ssid = "your_ssid";
-const char* password = "your_password";
+const char* ssid = "111";
+const char* password = "54188sb.";
 
 const int ledPin = 2;    // LED引脚
 int brightness = 128;    // 初始亮度
@@ -77,7 +77,7 @@ const char htmlPage[] = R"(
 </head>
 <body>
     <div class="container">
-        <h1>🔆 无极调光器</h1>
+        <h1>Brightness Controller</h1>
         <div class="slider-group">
             <label for="brightnessSlider">亮度控制：</label><br><br>
             <input type="range" id="brightnessSlider" min="0" max="255" value="128">
