@@ -77,7 +77,7 @@ const char htmlPage[] = R"(
 </head>
 <body>
     <div class="container">
-        <h1>Brightness Controller</h1>
+        <h1>🔆 无极调光器</h1>
         <div class="slider-group">
             <label for="brightnessSlider">亮度控制：</label><br><br>
             <input type="range" id="brightnessSlider" min="0" max="255" value="128">

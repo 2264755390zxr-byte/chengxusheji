@@ -168,32 +168,32 @@ const char htmlPage[] = R"(
 </head>
 <body>
     <div class="container">
-        <h1>📊 实时传感器仪表盘</h1>
+        <h1>Sensor Dashboard</h1>
         
         <div class="calibration-status calibrating" id="calibrationStatus">
-            📡 正在校准... 请勿接近传感器
+            Calibrating... Do not touch sensor
         </div>
 
         <div class="gauge-container">
             <div>
                 <div class="gauge-value" id="sensorValue">0</div>
-                <div class="gauge-unit">传感器数值</div>
+                <div class="gauge-unit">Sensor Value</div>
             </div>
         </div>
 
         <div class="stats">
             <div class="stat-box">
-                <div class="stat-label">基线值</div>
+                <div class="stat-label">Baseline</div>
                 <div class="stat-value" id="baseline">0</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">触摸阈值</div>
+                <div class="stat-label">Threshold</div>
                 <div class="stat-value" id="threshold">0</div>
             </div>
         </div>
 
         <div class="chart">
-            <div class="chart-title">📈 传感器信号强度</div>
+            <div class="chart-title">Signal Strength</div>
             <div class="chart-bar">
                 <div class="chart-fill" id="chartFill" style="width: 0%;">
                     <span id="chartPercent">0%</span>
@@ -203,9 +203,9 @@ const char htmlPage[] = R"(
         </div>
 
         <div class="info-text">
-            <p>✓ 系统自动校准中</p>
-            <p>✓ 手指逐渐靠近时数值会减小</p>
-            <p>⚠️ 触摸距离很近时会触发阈值</p>
+            <p>- System auto-calibrating</p>
+            <p>- Values decrease as you approach sensor</p>
+            <p>- Threshold triggers when very close</p>
         </div>
     </div>
 
@@ -228,14 +228,14 @@ const char htmlPage[] = R"(
                 thresholdValue = data.threshold;
                 isCalibrated = data.calibrated;
 
-                // 更新校准状态
+                // Update calibration status
                 const statusDiv = document.getElementById('calibrationStatus');
                 if (isCalibrated) {
                     statusDiv.className = 'calibration-status calibrated';
-                    statusDiv.textContent = '✓ 校准完成 | 系统就绪';
+                    statusDiv.textContent = 'Calibration Complete | Ready';
                 } else {
                     statusDiv.className = 'calibration-status calibrating';
-                    statusDiv.textContent = '📡 正在校准... 请勿接近传感器';
+                    statusDiv.textContent = 'Calibrating... Do not touch sensor';
                 }
 
                 // 更新进度条
